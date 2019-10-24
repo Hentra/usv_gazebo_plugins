@@ -40,6 +40,8 @@ along with this package.  If not, see <http://www.gnu.org/licenses/>.
 #include <ros/callback_queue.h>
 #include <ros/advertise_options.h>
 
+using namespace ignition;
+
 namespace gazebo
 {
   class UsvThrust : public ModelPlugin
@@ -104,7 +106,7 @@ namespace gazebo
       optionally specified by the bodyName parameter,
       The states are taken from this link and forces applied to this link.*/
     physics::LinkPtr link_;
-    math::Pose pose_;
+    math::Pose3d pose_;
     /*! Timeout for recieving Drive commands [s]*/
     double cmd_timeout_;
     common::Time prev_update_time_;

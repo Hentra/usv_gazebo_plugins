@@ -42,6 +42,8 @@ along with this package.  If not, see <http://www.gnu.org/licenses/>.
 #include <ros/callback_queue.h>
 #include <ros/advertise_options.h>
 
+using namespace ignition;
+
 namespace gazebo
 {
   class UsvWindPlugin : public ModelPlugin
@@ -82,10 +84,10 @@ namespace gazebo
     physics::LinkPtr link_;
     
     /*! Wind velocity in Gazebo coordinates [m/s] */
-    math::Vector3 param_wind_velocity_vector_;
+    math::Vector3d param_wind_velocity_vector_;
 
     /*! Wind force coefficients */
-    math::Vector3 param_wind_coeff_vector_;
+    math::Vector3d param_wind_coeff_vector_;
     
     boost::thread *spinner_thread_;
     
