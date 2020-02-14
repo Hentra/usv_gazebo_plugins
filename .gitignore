@@ -2,6 +2,15 @@
 *.*~
 *.*#
 
+# LaTeX
+docs/*.aux
+docs/*.blb
+docs/*.pdf
+docs/*.bbl
+docs/*.blg
+docs/*.log
+docs/*.out
+
 # Doxygen
 doc/html
 doc/manifest.yaml

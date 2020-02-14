@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   nav_msgs
   geometry_msgs
+  titanic_controller_msgs
+  dynamic_reconfigure
   )
 
 
@@ -55,6 +57,13 @@ generate_messages(
   )
 
 
+########################################
+## Dynamic reconfiguration generation ##
+########################################
+generate_dynamic_reconfigure_options(
+  cfg/Thrust.cfg
+  cfg/Dynamics.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -92,6 +101,7 @@ link_directories(
   ${catkin_LIBRARY_DIRS}
   )
 
+# Dynamics plugin
 add_library(usv_gazebo_dynamics_plugin
   src/usv_gazebo_dynamics_plugin.cpp
   )
@@ -103,6 +113,10 @@ target_link_libraries(usv_gazebo_dynamics_plugin
   Eigen3::Eigen
   )
 
+add_dependencies(usv_gazebo_dynamics_plugin
+  ${PROJECT_NAME}_gencfg
+)
+# Thrust plugin
 add_library(usv_gazebo_thrust_plugin
   src/usv_gazebo_thrust_plugin.cpp
   )
@@ -118,6 +132,26 @@ add_dependencies(usv_gazebo_thrust_plugin
   usv_gazebo_plugins_generate_messages_cpp
 )
 
+# Nhawigatora Thrust plugin
+add_library(usv_gazebo_nhawigatora_thrust_plugin
+  src/usv_gazebo_nhawigatora_thrust_plugin.cpp
+  src/impeller.cpp
+  src/thrustmapping.cpp
+  )
+
+target_link_libraries(usv_gazebo_nhawigatora_thrust_plugin
+  ${catkin_LIBRARIES}
+  ${GAZEBO_LIBRARIES}
+  ${Boost_LIBRARIES}
+  Eigen3::Eigen
+  )
+
+add_dependencies(usv_gazebo_nhawigatora_thrust_plugin
+  usv_gazebo_plugins_generate_messages_cpp
+  ${PROJECT_NAME}_gencfg
+)
+
+# Wind plugin
 add_library(usv_gazebo_wind_plugin
   src/usv_gazebo_wind_plugin.cpp
   )
@@ -188,10 +222,17 @@ target_link_libraries(frame_test
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_usv_gazebo_plugins.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+catkin_add_gtest(${PROJECT_NAME}-test 
+		test/impeller_test.cpp
+		src/impeller.cpp
+		src/thrustmapping.cpp
+		)
+target_link_libraries(${PROJECT_NAME}-test 
+		${catkin_LIBRARIES}
+		${GAZEBO_LIBRARIES}
+		${Boost_LIBRARIES}
+		${Eigen3_LIBRARIES}
+)
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)

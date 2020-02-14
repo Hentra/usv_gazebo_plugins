@@ -3,23 +3,26 @@
   <xacro:macro name="usv_thrust_gazebo" params="name">
     <!--Gazebo Plugin for simulating WAM-V dynamics-->
     <gazebo >
-      <plugin name="usv_thrust_${name}" filename="libusv_gazebo_thrust_plugin.so">
-	<bodyName>base_footprint</bodyName>
+      <plugin name="usv_thrust_${name}" filename="libusv_gazebo_nhawigatora_thrust_plugin.so">
+		<bodyName>base_footprint</bodyName>
 
-	<!-- Which thruster curve to use -->
-	<mappingType>1</mappingType>
-	<!-- General dimensions -->
-	<boatArea>2.2</boatArea>
-	<boatWidth>2.4</boatWidth>
-	<boatLength>4.9</boatLength>
-	<thrustOffsetZ>-0.04</thrustOffsetZ>
-	<!-- Thrust specification -->
-	<maxCmd>1.0</maxCmd>
-	<maxForceFwd>250.0</maxForceFwd>
-	<maxForceRev>-100.0</maxForceRev>
-	<cmdTimeout>1.0</cmdTimeout>
-	
-      </plugin>
-      </gazebo>
+		<!-- Which thruster curve to use -->
+		<mappingType>0</mappingType>
+		<!-- Impeller configurations -->
+		<bowThrusterMaxForceFwd>1</bowThrusterMaxForceFwd>
+		<bowThrusterMaxForceRev>1</bowThrusterMaxForceRev>
+		<propellerMaxForceFwd>1</propellerMaxForceFwd>
+		<propellerMaxForceRev>1</propellerMaxForceRev>
+		<!-- General dimensions -->
+		<boatArea>0.12</boatArea>
+		<boatWidth>0.89</boatWidth>
+		<boatLength>0.14</boatLength>
+		<thrusterOffsetZ>-0.01</thrusterOffsetZ>
+		<!-- Thrust specification -->
+		<cmdTimeout>1000</cmdTimeout>
+		<maxCmd>1.0</maxCmd>
+
+	  </plugin>
+    </gazebo>
   </xacro:macro>
 </robot>

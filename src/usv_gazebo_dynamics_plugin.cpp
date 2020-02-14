@@ -101,7 +101,7 @@ void UsvPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf )
   ROS_INFO_STREAM("Enumerating Model...");
   ROS_INFO_STREAM("Model name = "<< model_->GetName());
   physics::Link_V links = model_->GetLinks();
-  for (int ii=0; ii<links.size(); ii++){
+  for (size_t ii=0; ii<links.size(); ii++){
     ROS_INFO_STREAM("Link: "<<links[ii]->GetName());
   }
 
