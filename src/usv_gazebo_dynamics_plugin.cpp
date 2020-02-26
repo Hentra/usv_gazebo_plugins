@@ -29,6 +29,7 @@ along with this package.  If not, see <http://www.gnu.org/licenses/>.
 #include <usv_gazebo_plugins/usv_gazebo_dynamics_plugin.h>
 
 #define GRAVITY 9.815
+#define PI 3.141
 
 using namespace gazebo;
 
@@ -356,8 +357,8 @@ void UsvPlugin::UpdateChild()
       for (int ii=0; ii < param_wave_n_; ii++){
 	Ddotx=param_wave_directions_[ii][0]*X.X()
 	  +param_wave_directions_[ii][1]*X.Y();
-	w = 2.0*3.14159 / param_wave_periods_[ii];
-	k = w*w/9.81;
+	w = 2.0*PI / param_wave_periods_[ii];
+	k = w*w/GRAVITY;
 	dz += param_wave_amps_[ii]*cos(k*Ddotx-w*time_now.Float());;	
       }
       ROS_DEBUG_STREAM_THROTTLE(1.0,"wave disp: " << dz);
