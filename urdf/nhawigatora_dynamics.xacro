@@ -9,9 +9,9 @@
 	<waterLevel>3</waterLevel>
 	<waterDensity>997.8</waterDensity>
 	<cmdTimeout>1.0</cmdTimeout>
-	<xDotU>0</xDotU>
-	<yDotV>0</yDotV>
-	<nDotR>0</nDotR>
+	<xDotU>1</xDotU>
+	<yDotV>1</yDotV>
+	<nDotR>0.1</nDotR>
 	<xU>10</xU>
 	<xUU>0</xUU>
 	<yV>10</yV>
