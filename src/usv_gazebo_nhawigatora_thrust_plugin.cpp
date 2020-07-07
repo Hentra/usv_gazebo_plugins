@@ -216,10 +216,6 @@ void UsvNhawigatoraThrust::UpdateChild() {
                                                       << " bow_thruster: "
                                                       << thrust_bowthruster);
 
-  // Add torque
-//  link_->AddRelativeTorque(math::Vector3d(sway_factor_ * torque, 0, torque));
- // ROS_INFO_STREAM_THROTTLE(1.0, "SWAY " << sway_factor_ * torque);
-  // Add input force with offset below vessel
   math::Vector3d propeller_relpos(-1.0 * param_boat_length_ / 2.0, 0.0,
                         thruster_z_offset_); // relative pos of thrusters
   math::Vector3d propeller_force(thrust, 0, 0);
@@ -227,9 +223,11 @@ void UsvNhawigatoraThrust::UpdateChild() {
   math::Vector3d thruster_relpos(param_boat_length_ / 1.8, 0.0,
                         thruster_z_offset_); // relative pos of thrusters
   math::Vector3d thruster_force(0, torque, 0);
-//  math::Pose3d pose = link_->WorldPose();
 
-//  inputforce3 = pose.Rot().RotateVector(inputforce3);
+  math::Pose3d pose = link_->WorldPose();
+  propeller_force = pose.Rot().RotateVector(propeller_force);
+  thruster_force = pose.Rot().RotateVector(thruster_force);
+
   link_->AddForceAtRelativePosition(thruster_force, thruster_relpos);
   link_->AddForceAtRelativePosition(propeller_force, propeller_relpos);
 }
