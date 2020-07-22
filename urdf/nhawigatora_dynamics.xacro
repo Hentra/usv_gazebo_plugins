@@ -9,17 +9,17 @@
 	<waterLevel>3</waterLevel>
 	<waterDensity>997.8</waterDensity>
 	<cmdTimeout>1.0</cmdTimeout>
-	<xDotU>1</xDotU>
-	<yDotV>1</yDotV>
+	<xDotU>2</xDotU>
+	<yDotV>0.5</yDotV>
 	<nDotR>0.1</nDotR>
-	<xU>10</xU>
+	<xU>4</xU>
 	<xUU>0</xUU>
-	<yV>10</yV>
+	<yV>6</yV>
 	<yVV>0</yVV>
-	<zW>10</zW> 
-	<kP>1</kP>
-	<mQ>1</mQ>
-	<nR>1</nR>
+	<zW>4</zW> 
+	<kP>2</kP>
+	<mQ>0.5</mQ>
+	<nR>2.4</nR>
 	<nRR>0</nRR> 
 	<boatArea>0.12</boatArea>
 	<boatWidth>0.89</boatWidth>
